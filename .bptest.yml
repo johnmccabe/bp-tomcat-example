@@ -1,0 +1,7 @@
+name: Tomcat Test
+app: bp-tomcat.bom
+test: bp-tomcat-tests.bom
+brooklyns:
+ - local 
+locations:
+ - byon1

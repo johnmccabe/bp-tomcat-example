@@ -1,0 +1,36 @@
+brooklyn.catalog:
+  items:
+  - id: simple-tomcat-app-should-pass-test
+    version: 1.0
+    itemType: template
+    iconUrl: http://www.officialpsds.com/images/thumbs/Futurama-Fry-psd72597.png
+    name: Simple Tomcat App Should Pass Test
+    license: Apache-2.0
+    item:
+      services:
+      - type: simple-tomcat-app
+        id: simpleTomcatApp
+      - type: org.apache.brooklyn.test.framework.TestSensor
+        name: TEST [service.state] IS [running] WITHIN [10m]
+        target: $brooklyn:component("simpleTomcatApp")
+        sensor: service.state
+        timeout: 10m
+        assert:
+        - matches: running
+  - id: simple-tomcat-app-should-fail-test
+    version: 1.0
+    itemType: template
+    iconUrl: http://www.officialpsds.com/images/thumbs/Futurama-Fry-psd72597.png
+    name: Simple Tomcat App Should Fail Test
+    license: Apache-2.0
+    item:
+      services:
+      - type: simple-tomcat-app
+        id: simpleTomcatApp
+      - type: org.apache.brooklyn.test.framework.TestSensor
+        name: TEST [service.state] IS [running] WITHIN [1s]
+        target: $brooklyn:component("simpleTomcatApp")
+        sensor: service.state
+        timeout: 1s
+        assert:
+        - matches: running
